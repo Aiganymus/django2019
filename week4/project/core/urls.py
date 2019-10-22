@@ -10,9 +10,9 @@ urlpatterns = [
 ]
 
 router = routers.DefaultRouter()
-router.register('projects/members/', ProjectMemberViewSet, base_name='core')
-router.register('tasks/comments/', TaskCommentViewSet, base_name='core')
-router.register('tasks/documents/', TaskDocumentViewSet, base_name='core')
-router.register('projects/blocks/', BlockViewSet, base_name='core')
+router.register('projects/members', ProjectMemberViewSet, base_name='core')
+router.register('tasks/comments', TaskCommentViewSet, base_name='core')
+router.register('tasks/documents', TaskDocumentViewSet, base_name='core')
+router.register('projects/blocks', BlockViewSet, base_name='core')
 
 urlpatterns += router.urls

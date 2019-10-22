@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Project, ProjectMember
+from core.models import Project, ProjectMember, TaskDocument, Block, Task, TaskComment
 from user.serializers import UserSerializer
 
 
@@ -19,8 +19,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ProjectMemberSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    project = ProjectSerializer()
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    project = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = ProjectMember
@@ -28,38 +28,35 @@ class ProjectMemberSerializer(serializers.ModelSerializer):
 
 
 class BlockSerializer(serializers.ModelSerializer):
-    project = ProjectSerializer()
+    project = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        model = ProjectMember
+        model = Block
         fields = '__all__'
 
 
 class TaskSerializer(serializers.ModelSerializer):
     creator = UserSerializer(read_only=True)
-    executor = UserSerializer()
+    executor = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        model = ProjectMember
+        model = Task
         fields = '__all__'
 
 
 class TaskDocumentSerializer(serializers.ModelSerializer):
-    task = TaskSerializer()
+    task = serializers.PrimaryKeyRelatedField(read_only=True)
     creator = UserSerializer(read_only=True)
 
     class Meta:
-        model = ProjectMember
+        model = TaskDocument
         fields = '__all__'
 
 
 class TaskCommentSerializer(serializers.ModelSerializer):
-    task = TaskSerializer()
+    task = serializers.PrimaryKeyRelatedField(read_only=True)
     creator = UserSerializer(read_only=True)
 
     class Meta:
-        model = ProjectMember
+        model = TaskComment
         fields = '__all__'
-
-
-

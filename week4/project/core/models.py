@@ -82,7 +82,10 @@ class Task(models.Model):
 
     @classmethod
     def get_recent_projects(cls):
-        return cls.objects.filter(created_at=datetime.now())
+        today = datetime.now()
+        return cls.objects.filter(created_at__day=today.day,
+                                  created_at__month=today.month,
+                                  created_at__year=today.year)
 
 
 class TaskDocument(models.Model):

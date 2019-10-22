@@ -4,10 +4,6 @@ from project import settings
 
 
 class MainUser(AbstractUser):
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
-
     def __str__(self):
         return str(self.id) + ' ' + self.username
 
